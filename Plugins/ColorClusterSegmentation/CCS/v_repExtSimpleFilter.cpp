@@ -128,76 +128,39 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 		if (auxiliaryData[0]==DEVELOPER_DATA_HEADER)
 		{ // yes the filter is in this plugin (the filter is identified by a header ID (in auxiliaryData[0]) and a filter ID (in auxiliaryData[1]))
 			int res[2]={auxiliaryData[2],auxiliaryData[3]};		// Width and Height of the images/buffers/depth maps
-			void** ptrs=(void**)customData;						// 
+			void** ptrs=(void**)customData;						// Special input
 
 			// Pointers to images. http://www.coppeliarobotics.com/helpFiles/index.html - Entities/Vision Sensors/Vision sensor filter composition
 			float* inputImage=(float*)ptrs[0]; // original image from the vision sensor
 			float* inputDepth=(float*)ptrs[1]; // original depth map from the vision sensor
-			float* workImage=(float*)ptrs[2]; // work image
+			float* workImage=(float*)ptrs[2]; // work image --> Image to work on it
 			float* buffer1=(float*)ptrs[3]; // buffer 1 image
 			float* buffer2=(float*)ptrs[4]; // buffer 2 image
 			float* outputImage=(float*)ptrs[5]; // output image
 			unsigned char* params=(unsigned char*)ptrs[6];
 
-			if (auxiliaryData[1]==0)
-			{ // We have filter ID 0, we apply it:
-				int sizeValue=10;			// default parameter
-				float thresholdValue=0.5f;	// default parameter
-				if (params!=NULL)
-				{ // We use previously set values (those values are stored in the vision sensor and are also serialized!):
-					// For this sensor we have 3 values: 1 byte for the filter version (not filter ID!), 1 int for the size value and one flot for the threshold value
-					if (params[0]==1)
-					{ // for now we have only one filter version
-						sizeValue=((int*)(params+1))[0];  // size values
-						thresholdValue=((float*)(params+1))[1];  // threshold value
-					}
-				}
-				// We apply the filter:
-				for (int i=0;i<res[0];i++)
-				{
-					for (int j=0;j<res[1];j++)
-					{
-						if (((i/sizeValue)&1)+((j/sizeValue)&1)==2)
-						{
-							workImage[3*(i+j*res[0])+0]=0.0f;
-							workImage[3*(i+j*res[0])+1]=0.0f;
-							workImage[3*(i+j*res[0])+2]=0.0f;
-						}
-					}
-				}
-				// We trigger the sensor:
-				float average=0.0f;
-				for (int i=0;i<res[0]*res[1];i++)
-					average+=workImage[3*i+0]+workImage[3*i+1]+workImage[3*i+2];
-				average/=res[0]*res[1]*3;
-				if (average>thresholdValue)
-					replyData[0]=1; // Triggers!
-				else
-					replyData[0]=0; // Doesn't trigger
+			if (auxiliaryData[1]==-1) { // Filter: Color Cluster Segmentation
+				//for (int i=0;i<res[0]*res[1];i++)
+				//{
+				//		workImage[3*i+0]*=0.8f+(rand()/(float)RAND_MAX)*0.4f;
+				//		workImage[3*i+1]*=0.8f+(rand()/(float)RAND_MAX)*0.4f;
+				//		workImage[3*i+2]*=0.8f+(rand()/(float)RAND_MAX)*0.4f;
+				//		if (workImage[3*i+0]>1.0f)
+				//			workImage[3*i+0]=1.0f;
+				//		if (workImage[3*i+1]>1.0f)
+				//			workImage[3*i+1]=1.0f;
+				//		if (workImage[3*i+2]>1.0f)
+				//			workImage[3*i+2]=1.0f;
+				//}
 			}
-			if (auxiliaryData[1]==-1)
-			{ // We have filter ID -1
-				// We apply the filter (noise):
-				for (int i=0;i<res[0]*res[1];i++)
-				{
-					workImage[3*i+0]*=0.8f+(rand()/(float)RAND_MAX)*0.4f;
-					workImage[3*i+1]*=0.8f+(rand()/(float)RAND_MAX)*0.4f;
-					workImage[3*i+2]*=0.8f+(rand()/(float)RAND_MAX)*0.4f;
-					if (workImage[3*i+0]>1.0f)
-						workImage[3*i+0]=1.0f;
-					if (workImage[3*i+1]>1.0f)
-						workImage[3*i+1]=1.0f;
-					if (workImage[3*i+2]>1.0f)
-						workImage[3*i+2]=1.0f;
-				}
-			}
+			
 			// We return auxiliary information that resulted from the image processing (that could be a vector, a direction, or other filter specific data)
 			// That auxiliary information (as well as the trigger state) are retrieved with simHandleVisionSensor
 			// For now we simply return two values: 42.0 and 99.0:
-			replyData[1]=2; // the number of floats we return
-			retVal=simCreateBuffer(sizeof(float)*2); // is automatically released by V-REP upon callback return
-			((float*)retVal)[0]=42.0f;
-			((float*)retVal)[1]=99.0f;
+			//	-->replyData[1]=2; // the number of floats we return
+			//	-->retVal=simCreateBuffer(sizeof(float)*2); // is automatically released by V-REP upon callback return
+			//	-->((float*)retVal)[0]=42.0f;
+			//	-->((float*)retVal)[1]=99.0f;
 		}
 	}
 
