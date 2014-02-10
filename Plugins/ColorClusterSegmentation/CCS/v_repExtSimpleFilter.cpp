@@ -1,21 +1,20 @@
-// Copyright 2006-2014 Dr. Marc Andreas Freese. All rights reserved. 
-// marc@coppeliarobotics.com
-// www.coppeliarobotics.com
-// 
-// -------------------------------------------------------------------
-// This file is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// 
-// You are free to use/modify/distribute this file for whatever purpose!
-// -------------------------------------------------------------------
-//
-// This file was automatically created for V-REP release V3.1.0 on January 20th 2014
+//---------------------------------------------------------------------------------------
+//		V-REP Filter Plugins
+//			Author: Pablo Ramón Soria.
+//			Based on: V-REP code. Copyright 2006-2014 Dr. Marc Andreas Freese. All rights reserved. 
+//			Date: 2014-02-10
+//---------------------------------------------------------------------------------------
 
 #include "v_repExtSimpleFilter.h"
 #include "v_repLib.h"
 #include "pluginGlobals.h"
 #include <iostream>
+#include <vector>
+
+#include <opencv/cv.h>
+#include "ImageSegmentation\ColocClusterImageSegmentation.h"
+#include "ImageSegmentation\ColorClusterSpace.h"
+#include "Types\SimpleObject.h"
 
 #ifdef _WIN32
 	#include <direct.h>
@@ -26,12 +25,15 @@
 	#define _stricmp(x,y) strcasecmp(x,y)
 #endif
 
+// General information about the plugins implemented in the code
 const int filterCount=1; // Number of filters coded in this pluging
 int filterID[filterCount]={-1}; // Filters with negative IDs won't have a dialog or special triggering conditions (negative IDs for simple filters!)
 // Header ID (DEVELOPER_DATA_HEADER), filterIDs and parameter values of a filter are serialized!! (don't change at will!)
 int nextFilterEnum=0; // used during enumeration
 char* filterName[filterCount]={"ESI-PabloRamonSoria:	Color Cluster Segmentation"}; // Names of filters
 
+
+// Main functions of the V-REP plugins DLL
 LIBRARY vrepLib;
 
 VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
@@ -130,7 +132,7 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 			int res[2]={auxiliaryData[2],auxiliaryData[3]};		// Width and Height of the images/buffers/depth maps
 			void** ptrs=(void**)customData;						// Special input
 
-			// Pointers to images. http://www.coppeliarobotics.com/helpFiles/index.html - Entities/Vision Sensors/Vision sensor filter composition
+			// Pointers to images. http://www.coppeliarobotics.com/helpFiles/index.html - Entities/Scene Objects/Vision Sensors/Vision sensor filter composition
 			float* inputImage=(float*)ptrs[0]; // original image from the vision sensor
 			float* inputDepth=(float*)ptrs[1]; // original depth map from the vision sensor
 			float* workImage=(float*)ptrs[2]; // work image --> Image to work on it
@@ -140,18 +142,20 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 			unsigned char* params=(unsigned char*)ptrs[6];
 
 			if (auxiliaryData[1]==-1) { // Filter: Color Cluster Segmentation
-				//for (int i=0;i<res[0]*res[1];i++)
-				//{
-				//		workImage[3*i+0]*=0.8f+(rand()/(float)RAND_MAX)*0.4f;
-				//		workImage[3*i+1]*=0.8f+(rand()/(float)RAND_MAX)*0.4f;
-				//		workImage[3*i+2]*=0.8f+(rand()/(float)RAND_MAX)*0.4f;
-				//		if (workImage[3*i+0]>1.0f)
-				//			workImage[3*i+0]=1.0f;
-				//		if (workImage[3*i+1]>1.0f)
-				//			workImage[3*i+1]=1.0f;
-				//		if (workImage[3*i+2]>1.0f)
-				//			workImage[3*i+2]=1.0f;
-				//}
+
+				cv::Mat image(res[0], res[1], CV_32FC3, ptrs[2]);
+
+				// 666 TODO: mascaras por entrada con checkboxes
+				vision::segmentation::ColorClusterSpace *CS = vision::segmentation::CreateHSVCS_8c(255, 255, 16);	//("11111111", "11111111", "00010000");
+
+				// 666 TODO: threshold por entrada con entrybox
+				int threshold = 10;
+
+				// 666 TODO: displayear de alguna forma para luego hacer el EKF.
+				std::vector<vision::SimpleObject> objects;
+
+				vision::segmentation::ColorClusterImageSegmentation(image, *CS, threshold, objects);
+
 			}
 			
 			// We return auxiliary information that resulted from the image processing (that could be a vector, a direction, or other filter specific data)

@@ -13,8 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="segmentation">
-      <UniqueIdentifier>{65d6f014-a51d-404a-a38e-a40e6b3e1e80}</UniqueIdentifier>
+    <Filter Include="CCS">
+      <UniqueIdentifier>{1bf490a8-2233-40b8-bb55-2d09dee72baf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,34 +24,43 @@
     <ClInclude Include="pluginGlobals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="segmentation\ColocClusterImageSegmentation.h">
-      <Filter>segmentation</Filter>
+    <ClInclude Include="ImageSegmentation\ColocClusterImageSegmentation.h">
+      <Filter>CCS</Filter>
     </ClInclude>
-    <ClInclude Include="segmentation\ColorClusterSpace.h">
-      <Filter>segmentation</Filter>
+    <ClInclude Include="ImageSegmentation\ColorClusterSpace.h">
+      <Filter>CCS</Filter>
     </ClInclude>
-    <ClInclude Include="segmentation\ColorSpaceHSV8.h">
-      <Filter>segmentation</Filter>
+    <ClInclude Include="ImageSegmentation\ColorSpaceHSV8.h">
+      <Filter>CCS</Filter>
     </ClInclude>
-    <ClInclude Include="segmentation\SegmentedObject.h">
-      <Filter>segmentation</Filter>
+    <ClInclude Include="ImageSegmentation\SegmentedObject.h">
+      <Filter>CCS</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\SimpleObject.h">
+      <Filter>CCS</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\types.h">
+      <Filter>CCS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="v_repExtSimpleFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="segmentation\ColorClusterImageSegmentation.cpp">
-      <Filter>segmentation</Filter>
+    <ClCompile Include="ImageSegmentation\ColorClusterImageSegmentation.cpp">
+      <Filter>CCS</Filter>
     </ClCompile>
-    <ClCompile Include="segmentation\ColorClusterSpace.cpp">
-      <Filter>segmentation</Filter>
+    <ClCompile Include="ImageSegmentation\ColorClusterSpace.cpp">
+      <Filter>CCS</Filter>
     </ClCompile>
-    <ClCompile Include="segmentation\ColorSpaceHSV8.cpp">
-      <Filter>segmentation</Filter>
+    <ClCompile Include="ImageSegmentation\ColorSpaceHSV8.cpp">
+      <Filter>CCS</Filter>
     </ClCompile>
-    <ClCompile Include="segmentation\SegmentedObject.cpp">
-      <Filter>segmentation</Filter>
+    <ClCompile Include="ImageSegmentation\SegmentedObject.cpp">
+      <Filter>CCS</Filter>
+    </ClCompile>
+    <ClCompile Include="Types\SimpleObject.cpp">
+      <Filter>CCS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,2 +1,5 @@
 /Plugins/ColorClusterSegmentation/*.sdf
 /Plugins/ColorClusterSegmentation/*.suo
+/Plugins/ColorClusterSegmentation/CCS/Debug
+/Plugins/ColorClusterSegmentation/CCS/*.user
+/Plugins/ColorClusterSegmentation/Debug

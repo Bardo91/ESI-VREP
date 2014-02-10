@@ -39,16 +39,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\include;C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\common;$(IncludePath)</IncludePath>
+    <IncludePath>C:\opencv\opencv\build\include;C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\include;C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\common;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\opencv\opencv\build\x86\vc11\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\include;C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\common;$(IncludePath)</IncludePath>
+    <IncludePath>C:\opencv\opencv\build\include;C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\include;C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\common;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\opencv\opencv\build\x86\vc11\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -56,7 +59,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level2</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -69,18 +72,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ImageSegmentation\ColocClusterImageSegmentation.h" />
+    <ClInclude Include="ImageSegmentation\ColorClusterSpace.h" />
+    <ClInclude Include="ImageSegmentation\ColorSpaceHSV8.h" />
+    <ClInclude Include="ImageSegmentation\SegmentedObject.h" />
     <ClInclude Include="pluginGlobals.h" />
-    <ClInclude Include="segmentation\ColocClusterImageSegmentation.h" />
-    <ClInclude Include="segmentation\ColorClusterSpace.h" />
-    <ClInclude Include="segmentation\ColorSpaceHSV8.h" />
-    <ClInclude Include="segmentation\SegmentedObject.h" />
+    <ClInclude Include="Types\SimpleObject.h" />
+    <ClInclude Include="Types\types.h" />
     <ClInclude Include="v_repExtSimpleFilter.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="segmentation\ColorClusterImageSegmentation.cpp" />
-    <ClCompile Include="segmentation\ColorClusterSpace.cpp" />
-    <ClCompile Include="segmentation\ColorSpaceHSV8.cpp" />
-    <ClCompile Include="segmentation\SegmentedObject.cpp" />
+    <ClCompile Include="ImageSegmentation\ColorClusterImageSegmentation.cpp" />
+    <ClCompile Include="ImageSegmentation\ColorClusterSpace.cpp" />
+    <ClCompile Include="ImageSegmentation\ColorSpaceHSV8.cpp" />
+    <ClCompile Include="ImageSegmentation\SegmentedObject.cpp" />
+    <ClCompile Include="Types\SimpleObject.cpp" />
     <ClCompile Include="v_repExtSimpleFilter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

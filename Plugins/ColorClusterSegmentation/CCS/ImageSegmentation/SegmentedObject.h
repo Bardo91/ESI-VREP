@@ -21,7 +21,9 @@ namespace vision {
 			unsigned int je;
 			unsigned int size;
 			int color;
-			struct LineObjRLE *parent;
+			std::vector<std::vector<LineObjRLE>>::iterator parentI;
+			std::vector<LineObjRLE>::iterator parentJ;
+			bool hasParent;
 			int iObj;
 		};
 
