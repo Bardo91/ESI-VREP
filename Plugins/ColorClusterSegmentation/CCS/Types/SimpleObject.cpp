@@ -26,8 +26,8 @@ namespace vision{
 	SimpleObject::SimpleObject(cv::Point2d& _upperLeft, cv::Point2d& _downRight, unsigned int _size, int _color){
 		upperLeft = _upperLeft;
 		downRight = _downRight;
-		centroid = Point((_upperLeft.x + _downRight.x)/2, (_upperLeft.y + _downRight.y)/2);
-
+		centroid = Point(	int((_upperLeft.x + _downRight.x)/2), 
+							int((_upperLeft.y + _downRight.y)/2));
 		size = _size;
 
 		color = _color;

@@ -6,7 +6,7 @@
 //---------------------------------------------------------------------------------------
 
 #include "v_repExtSimpleFilter.h"
-#include "v_repLib.h"
+#include "v_rep\include\v_repLib.h"
 #include "pluginGlobals.h"
 #include <iostream>
 #include <vector>
