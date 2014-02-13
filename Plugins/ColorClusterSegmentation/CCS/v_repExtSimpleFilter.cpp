@@ -163,7 +163,7 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 			} // SIMPLE RED SEGMENTATION
 			//-------------------------------------------------------------------------
 			else if (auxiliaryData[1]==-2) { // Filter: Color Cluster Segmentation
-				cv::Mat image(res[0], res[1], CV_32FC3, workImage); // Internamente manja el mismo puntero que workImage, dasgood!
+				cv::Mat image(res[0], res[1], CV_32FC3, workImage);
 				
 				image.convertTo(image, CV_8UC3);	// Hay que pasar de float a uchar!
 
@@ -181,8 +181,32 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 				// 666 TODO: displayear de alguna forma para luego hacer el EKF.
 				std::vector<vision::SimpleObject> objects;
 				
-				vision::segmentation::ColorClusterImageSegmentation(workImage, res[0], res[1], CS, threshold, objects);
+				//vision::segmentation::ColorClusterImageSegmentation(workImage, res[0], res[1], CS, threshold, objects);
 				
+				vision::segmentation::c3i color;
+
+				for(int i = 0; i < res[0]*res[1]; i ++){
+					color.a = int(workImage[3*i + 0]*255);
+					color.b = int(workImage[3*i + 1]*255);
+					color.c = int(workImage[3*i + 2]*255);
+					
+					//std::cout	<< "--------------------------------------" << std::endl 
+					//			<< "i = " << i << std::endl;
+					//std::cout << "R: "<< color.a << " G: " << color.b << " B: "<< color.c << std::endl;
+					color = vision::segmentation::RGB2HSV(color);
+					//std::cout << "H: "<< color.a << " S: " << color.b << " V: "<< color.c << std::endl;
+					if(color.a > 160 && color.b > 100 && color.c > 100){
+						workImage[3*i + 0] = 1.0f;
+						workImage[3*i + 2] = 0.0f;
+						workImage[3*i + 1] = 0.0f;
+					}
+					else{
+						workImage[3*i + 0] = 0.0f;
+						workImage[3*i + 2] = 0.0f;
+						workImage[3*i + 1] = 0.0f;
+					}
+				}
+
 				cv::imshow("bubble", image);
 				
 				cv::cvtColor(image, image, CV_BGR2RGB);

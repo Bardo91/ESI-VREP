@@ -40,6 +40,9 @@ namespace vision {
 				MIN= color.b;
 			if(color.c < color.b && color.c < color.a)
 				MIN = color.c;
+			
+			//std::cout	<< "--------------------------------------" << std::endl;
+			//std::cout << "MIN: " << MIN << " MAX: " << MAX << std::endl;
 
 			// Calculate H
 			if(MAX = MIN)
@@ -54,15 +57,20 @@ namespace vision {
 				hsv.a = 60*(color.a - color.b)/(MAX-MIN) + 240;
 			hsv.a = hsv.a/2;
 
+			//std::cout << "H: " << color.a << std::endl;
+
 			// Calculate S
 			if(MAX == 0)
 				hsv.b = 0;
 			else
-				hsv.b = int(1 - MAX/MIN);
+				hsv.b = int(1 - MIN/MAX);
+
+			//std::cout << "S: " << color.a << std::endl;
 
 			// Calculate V
 			hsv.c = MAX;
 
+			//std::cout << "V: " << color.c << std::endl;
 			return hsv;
 		}
 		
