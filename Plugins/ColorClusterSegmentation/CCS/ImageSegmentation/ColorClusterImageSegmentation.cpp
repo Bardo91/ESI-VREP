@@ -20,11 +20,55 @@ using namespace vision::segmentation;
 namespace vision {
 	namespace segmentation{
 	//-----------------------------------------------------------------------
-	//---------------- 1 Camera algorithm
+		color3int RGB2HSV(color3int color){
+			color3int hsv;
+			hsv.a = 0;
+			hsv.b = 0;
+			hsv.c = 0;
 
-		int ColorClusterImageSegmentation(cv::Mat& _frame, ColorClusterSpace& _CS, unsigned int _threshold, std::vector<SimpleObject>& _objects){
-			imageBGR2HSV(_frame);
+			int MAX = 1, MIN = 0;
+			if(color.a > color.b && color.a > color.c)
+				MAX = color.a;
+			if(color.b > color.a && color.b > color.c)
+				MAX = color.b;
+			if(color.c > color.b && color.c > color.a)
+				MAX = color.c;
+			
+			if(color.a < color.b && color.a < color.c)
+				MIN = color.a;
+			if(color.b < color.a && color.b < color.c)
+				MIN= color.b;
+			if(color.c < color.b && color.c < color.a)
+				MIN = color.c;
 
+			// Calculate H
+			if(MAX = MIN)
+				hsv.a = 0;
+			else if(MAX = color.a && color.b > color.c)
+				hsv.a = 60*(color.b - color.c)/(MAX-MIN) + 0;
+			else if(MAX = color.a && color.b < color.c)
+				hsv.a = 60*(color.b - color.c)/(MAX-MIN) + 360;
+			else if(MAX = color.b)
+				hsv.a = 60*(color.c-color.a)/(MAX-MIN) + 120;
+			else if(MAX = color.c)
+				hsv.a = 60*(color.a - color.b)/(MAX-MIN) + 240;
+			hsv.a = hsv.a/2;
+
+			// Calculate S
+			if(MAX == 0)
+				hsv.b = 0;
+			else
+				hsv.b = int(1 - MAX/MIN);
+
+			// Calculate V
+			hsv.c = MAX;
+
+			return hsv;
+		}
+		
+		//---------------- 1 Camera algorithm
+
+		int ColorClusterImageSegmentation(float * image,int width, int height, ColorClusterSpace& _CS, unsigned int _threshold, std::vector<SimpleObject>& _objects){
 			// 666 TODO: use statics variables to save time (allocating, etc...)
 			vector<vector<struct LineObjRLE> > aRLE;
 
@@ -34,21 +78,19 @@ namespace vision {
 
 			objs.reserve(5000);
 
-
-			int n = _frame.channels(); // Count the number of image's channels to use the pointer
-
 			int color;
 
 			short int js = 0, colorRLE = -1; // Variables for RLE encode
-			for (int i = 0; i < _frame.rows; i++) {
-				uchar* ptr = _frame.ptr<uchar>(i); // Pointer to i row
+			for (int i = 0; i < height; i++) {
 				vector<LineObjRLE> temp;
-				for (int j = 0; j < _frame.cols; j++) {
+				for (int j = 0; j < width; j++) {
 					// Proximate the color to a cluster
 					c3i auxCol1;
-					auxCol1.a = ptr[n * j];
-					auxCol1.b = ptr[n * j + 1];
-					auxCol1.c = ptr[n * j + 2];
+					auxCol1.a = int(image[i + 3 * j + 0]*255);
+					auxCol1.b = int(image[i + 3 * j + 1]*255);
+					auxCol1.c = int(image[i + 3 * j + 2]*255);
+
+					auxCol1 = RGB2HSV(auxCol1);
 					color = _CS.whichColor(auxCol1);
 
 					// RLE encoding
@@ -56,7 +98,7 @@ namespace vision {
 						colorRLE = color;
 						js = 0;
 					} else {
-						if (j == _frame.cols - 1) {
+						if (j == height - 1) {
 							LineObjRLE aux;
 							aux.i = i;
 							aux.js = js;
@@ -86,13 +128,13 @@ namespace vision {
 					// Change the color (Possible improve assigning directly the BGR color instead of using imageHSV2BGR)
 
 					if (color == -1) {
-						ptr[n * j] = _CS.clusters[0].a;
-						ptr[n * j + 1] = _CS.clusters[0].b;
-						ptr[n * j + 2] = _CS.clusters[0].c;
+						image[i + 3 * j] = _CS.clusters[0].a/255.0f;
+						image[i + 3 * j + 1] = _CS.clusters[0].b/255.0f;
+						image[i + 3 * j + 2] = _CS.clusters[0].c/255.0f;
 					} else {
-						ptr[n * j] = _CS.clusters[color].a;
-						ptr[n * j + 1] = _CS.clusters[color].b;
-						ptr[n * j + 2] = _CS.clusters[color].c;
+						image[i + 3 * j] = _CS.clusters[color].a/255.0f;
+						image[i + 3 * j + 1] = _CS.clusters[color].b/255.0f;
+						image[i + 3 * j + 2] = _CS.clusters[color].c/255.0f;
 					}
 				}
 
@@ -185,10 +227,6 @@ namespace vision {
 				if(objs[i].getSize() >= _threshold)
 					_objects.push_back(SimpleObject(objs[i].getUpperLeft(), objs[i].getDownRight(), objs[i].getSize(), objs[i].getColor()));
 			}
-
-			#ifdef _DEBUG
-				imageHSV2BGR(_frame);// 666 TODO: delete if visualization isn't needed (get 5%)
-			#endif
 
 			return 0;
 		} // int ColorClusterImageSegmentation(...) 1 camera

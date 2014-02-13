@@ -16,7 +16,7 @@
 
 // Never change following data, data is serialized together with a scene!
 // Keep following data same across all of your plugins to V-REP
-#define DEVELOPER_DATA_HEADER 0		// Keep always same for all plugins created by you or your company!!!
+#define DEVELOPER_DATA_HEADER 34		// Keep always same for all plugins created by you or your company!!!
 									// This number identifies data you might save together with scene objects
 									// If several developers or companies are using the same number, then
 									// data attached to scene objects might not be interpreted correctly.

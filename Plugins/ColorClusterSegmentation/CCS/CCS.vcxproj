@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}</ProjectGuid>
     <RootNamespace>CCS</RootNamespace>
+    <ProjectName>v_repExtCCS</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -8,10 +8,12 @@
 #include "v_repExtSimpleFilter.h"
 #include "v_rep\include\v_repLib.h"
 #include "pluginGlobals.h"
+
 #include <iostream>
 #include <vector>
 
 #include <opencv/cv.h>
+#include <opencv/highgui.h>
 #include "ImageSegmentation\ColocClusterImageSegmentation.h"
 #include "ImageSegmentation\ColorClusterSpace.h"
 #include "Types\SimpleObject.h"
@@ -26,11 +28,12 @@
 #endif
 
 // General information about the plugins implemented in the code
-const int filterCount=1; // Number of filters coded in this pluging
-int filterID[filterCount]={-1}; // Filters with negative IDs won't have a dialog or special triggering conditions (negative IDs for simple filters!)
+const int filterCount=2; // Number of filters coded in this pluging
+int filterID[filterCount]={-1, -2}; // Filters with negative IDs won't have a dialog or special triggering conditions (negative IDs for simple filters!)
 // Header ID (DEVELOPER_DATA_HEADER), filterIDs and parameter values of a filter are serialized!! (don't change at will!)
 int nextFilterEnum=0; // used during enumeration
-char* filterName[filterCount]={"ESI-PabloRamonSoria:	Color Cluster Segmentation"}; // Names of filters
+char* filterName[filterCount]={ "ESI-PabloRamonSoria:	Simple Red Segmentation",
+								"ESI-PabloRamonSoria:	Color Cluster Segmentation"}; // Names of filters
 
 
 // Main functions of the V-REP plugins DLL
@@ -141,23 +144,53 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 			float* outputImage=(float*)ptrs[5]; // output image
 			unsigned char* params=(unsigned char*)ptrs[6];
 
-			if (auxiliaryData[1]==-1) { // Filter: Color Cluster Segmentation
+			if(auxiliaryData[1] == -1){
+				for (int i = 0 ; i < res[0]*res[1] ; i++)
+				{
+					if(		workImage[3*i + 0] > 0.75f &&
+							workImage[3*i + 1] < 0.20f &&
+							workImage[3*i + 2] < 0.20f){
+						workImage[3*i + 0] = 1.0f;
+						workImage[3*i + 1] = 0.0f;
+						workImage[3*i + 2] = 0.0f;
+					}
+					else{
+						workImage[3*i + 0] = 0.0f;
+						workImage[3*i + 1] = 0.0f;
+						workImage[3*i + 2] = 0.0f;
+					}
+				}
+			} // SIMPLE RED SEGMENTATION
+			//-------------------------------------------------------------------------
+			else if (auxiliaryData[1]==-2) { // Filter: Color Cluster Segmentation
+				cv::Mat image(res[0], res[1], CV_32FC3, workImage); // Internamente manja el mismo puntero que workImage, dasgood!
+				
+				image.convertTo(image, CV_8UC3);	// Hay que pasar de float a uchar!
 
-				cv::Mat image(res[0], res[1], CV_32FC3, ptrs[2]);
-
+				cv::cvtColor(image, image, CV_RGB2BGR);
+				
 				// 666 TODO: mascaras por entrada con checkboxes
-				vision::segmentation::ColorClusterSpace *CS = vision::segmentation::CreateHSVCS_8c(255, 255, 16);	//("11111111", "11111111", "00010000");
-
+				vision::segmentation::ColorClusterSpace CS = *vision::segmentation::CreateHSVCS_8c(
+																			vision::segmentation::bin2dec("11111111"),
+																			vision::segmentation::bin2dec("11111111"),
+																			vision::segmentation::bin2dec("00010000"));	//("11111111", "11111111", "00010000");
+				
 				// 666 TODO: threshold por entrada con entrybox
 				int threshold = 10;
-
+				
 				// 666 TODO: displayear de alguna forma para luego hacer el EKF.
 				std::vector<vision::SimpleObject> objects;
+				
+				vision::segmentation::ColorClusterImageSegmentation(workImage, res[0], res[1], CS, threshold, objects);
+				
+				cv::imshow("bubble", image);
+				
+				cv::cvtColor(image, image, CV_BGR2RGB);
 
-				vision::segmentation::ColorClusterImageSegmentation(image, *CS, threshold, objects);
-
-			}
+			}	// COLOR CLUSTER SEGMENTATION
 			
+			//-------------------------------------------------------------------------
+
 			// We return auxiliary information that resulted from the image processing (that could be a vector, a direction, or other filter specific data)
 			// That auxiliary information (as well as the trigger state) are retrieved with simHandleVisionSensor
 			// For now we simply return two values: 42.0 and 99.0:
