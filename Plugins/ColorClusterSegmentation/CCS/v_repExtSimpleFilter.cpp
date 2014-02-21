@@ -14,9 +14,8 @@
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
-#include "ImageSegmentation\ColocClusterImageSegmentation.h"
-#include "ImageSegmentation\ColorClusterSpace.h"
-#include "Types\SimpleObject.h"
+#include <algorithms/segmentation/ColorClustering.h>
+#include <core/types/ColorSpaceHSV8.h>
 
 #ifdef _WIN32
 	#include <direct.h>
@@ -161,51 +160,33 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 					}
 				}
 			} // SIMPLE RED SEGMENTATION
+
 			//-------------------------------------------------------------------------
 			else if (auxiliaryData[1]==-2) { // Filter: Color Cluster Segmentation
 				cv::Mat image(res[0], res[1], CV_32FC3, workImage);
 				
 				image.convertTo(image, CV_8UC3);	// Hay que pasar de float a uchar!
 
-				cv::cvtColor(image, image, CV_RGB2BGR);
+				cv::cvtColor(image, image, CV_RGB2HSV);
+				
 				
 				// 666 TODO: mascaras por entrada con checkboxes
-				vision::segmentation::ColorClusterSpace CS = *vision::segmentation::CreateHSVCS_8c(
-																			vision::segmentation::bin2dec("11111111"),
-																			vision::segmentation::bin2dec("11111111"),
-																			vision::segmentation::bin2dec("00010000"));	//("11111111", "11111111", "00010000");
+				BIL::algorithms::ColorClusterSpace<float> *CS = BIL::algorithms::CreateHSVCS_fc(	BIL::algorithms::bin2dec("11111111"),
+																									BIL::algorithms::bin2dec("00010000"),
+																									BIL::algorithms::bin2dec("11111111"));
 				
 				// 666 TODO: threshold por entrada con entrybox
-				int threshold = 10;
+				unsigned int threshold = 10;
 				
 				// 666 TODO: displayear de alguna forma para luego hacer el EKF.
-				std::vector<vision::SimpleObject> objects;
+				std::vector<BIL::ImageObject> objects;
 				
-				//vision::segmentation::ColorClusterImageSegmentation(workImage, res[0], res[1], CS, threshold, objects);
-				
-				vision::segmentation::c3i color;
-
-				for(int i = 0; i < res[0]*res[1]; i ++){
-					color.a = int(workImage[3*i + 0]*255);
-					color.b = int(workImage[3*i + 1]*255);
-					color.c = int(workImage[3*i + 2]*255);
-					
-					//std::cout	<< "--------------------------------------" << std::endl 
-					//			<< "i = " << i << std::endl;
-					//std::cout << "R: "<< color.a << " G: " << color.b << " B: "<< color.c << std::endl;
-					color = vision::segmentation::RGB2HSV(color);
-					//std::cout << "H: "<< color.a << " S: " << color.b << " V: "<< color.c << std::endl;
-					if(color.a > 160 && color.b > 100 && color.c > 100){
-						workImage[3*i + 0] = 1.0f;
-						workImage[3*i + 2] = 0.0f;
-						workImage[3*i + 1] = 0.0f;
-					}
-					else{
-						workImage[3*i + 0] = 0.0f;
-						workImage[3*i + 2] = 0.0f;
-						workImage[3*i + 1] = 0.0f;
-					}
-				}
+				BIL::algorithms::ColorClustering<float>(	(float*) image.data,
+															res[0], 
+															res[1], 
+															threshold, 
+															objects, 
+															*CS);
 
 				cv::imshow("bubble", image);
 				

@@ -40,11 +40,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\opencv\opencv\build\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Programming\BOVIL\source;C:\opencv\opencv\build\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\opencv\opencv\build\x86\vc11\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\opencv\opencv\build\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Programming\BOVIL\source;C:\opencv\opencv\build\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\opencv\opencv\build\x86\vc11\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -75,13 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ImageSegmentation\ColocClusterImageSegmentation.h" />
-    <ClInclude Include="ImageSegmentation\ColorClusterSpace.h" />
-    <ClInclude Include="ImageSegmentation\ColorSpaceHSV8.h" />
-    <ClInclude Include="ImageSegmentation\SegmentedObject.h" />
     <ClInclude Include="pluginGlobals.h" />
-    <ClInclude Include="Types\SimpleObject.h" />
-    <ClInclude Include="Types\types.h" />
     <ClInclude Include="v_repExtSimpleFilter.h" />
     <ClInclude Include="v_rep\include\extApiCustomConst.h" />
     <ClInclude Include="v_rep\include\v_repConst.h" />
@@ -89,11 +83,6 @@
     <ClInclude Include="v_rep\include\v_repTypes.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ImageSegmentation\ColorClusterImageSegmentation.cpp" />
-    <ClCompile Include="ImageSegmentation\ColorClusterSpace.cpp" />
-    <ClCompile Include="ImageSegmentation\ColorSpaceHSV8.cpp" />
-    <ClCompile Include="ImageSegmentation\SegmentedObject.cpp" />
-    <ClCompile Include="Types\SimpleObject.cpp" />
     <ClCompile Include="v_repExtSimpleFilter.cpp" />
     <ClCompile Include="v_rep\common\v_repLib.cpp" />
   </ItemGroup>

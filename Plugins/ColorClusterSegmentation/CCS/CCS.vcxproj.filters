@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="CCS">
-      <UniqueIdentifier>{1bf490a8-2233-40b8-bb55-2d09dee72baf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="v_rep">
       <UniqueIdentifier>{54508915-35cc-4131-8d6f-1af8d7056bbe}</UniqueIdentifier>
     </Filter>
@@ -26,24 +23,6 @@
     </ClInclude>
     <ClInclude Include="pluginGlobals.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageSegmentation\ColocClusterImageSegmentation.h">
-      <Filter>CCS</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageSegmentation\ColorClusterSpace.h">
-      <Filter>CCS</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageSegmentation\ColorSpaceHSV8.h">
-      <Filter>CCS</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageSegmentation\SegmentedObject.h">
-      <Filter>CCS</Filter>
-    </ClInclude>
-    <ClInclude Include="Types\SimpleObject.h">
-      <Filter>CCS</Filter>
-    </ClInclude>
-    <ClInclude Include="Types\types.h">
-      <Filter>CCS</Filter>
     </ClInclude>
     <ClInclude Include="v_rep\include\extApiCustomConst.h">
       <Filter>v_rep</Filter>
@@ -61,21 +40,6 @@
   <ItemGroup>
     <ClCompile Include="v_repExtSimpleFilter.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageSegmentation\ColorClusterImageSegmentation.cpp">
-      <Filter>CCS</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageSegmentation\ColorClusterSpace.cpp">
-      <Filter>CCS</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageSegmentation\ColorSpaceHSV8.cpp">
-      <Filter>CCS</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageSegmentation\SegmentedObject.cpp">
-      <Filter>CCS</Filter>
-    </ClCompile>
-    <ClCompile Include="Types\SimpleObject.cpp">
-      <Filter>CCS</Filter>
     </ClCompile>
     <ClCompile Include="v_rep\common\v_repLib.cpp">
       <Filter>v_rep</Filter>
