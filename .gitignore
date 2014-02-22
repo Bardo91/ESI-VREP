@@ -3,3 +3,5 @@
 /Plugins/ColorClusterSegmentation/CCS/Debug
 /Plugins/ColorClusterSegmentation/CCS/*.user
 /Plugins/ColorClusterSegmentation/Debug
+/Plugins/ColorClusterSegmentation/CCS/Release
+/Plugins/ColorClusterSegmentation/Release

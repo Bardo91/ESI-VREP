@@ -163,35 +163,33 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 
 			//-------------------------------------------------------------------------
 			else if (auxiliaryData[1]==-2) { // Filter: Color Cluster Segmentation
-				cv::Mat image(res[0], res[1], CV_32FC3, workImage);
-				
-				image.convertTo(image, CV_8UC3);	// Hay que pasar de float a uchar!
-
-				cv::cvtColor(image, image, CV_RGB2HSV);
-				
-				
-				// 666 TODO: mascaras por entrada con checkboxes
-				BIL::algorithms::ColorClusterSpace<float> *CS = BIL::algorithms::CreateHSVCS_fc(	BIL::algorithms::bin2dec("11111111"),
-																									BIL::algorithms::bin2dec("00010000"),
-																									BIL::algorithms::bin2dec("11111111"));
-				
-				// 666 TODO: threshold por entrada con entrybox
-				unsigned int threshold = 10;
-				
+	
 				// 666 TODO: displayear de alguna forma para luego hacer el EKF.
-				std::vector<BIL::ImageObject> objects;
+				std::vector<BOVIL::ImageObject> objects;
 				
-				BIL::algorithms::ColorClustering<float>(	(float*) image.data,
+
+				// 666 TODO: está recibiendo  todo vacío
+				BOVIL::algorithms::ColorClustering<float>(	workImage,
 															res[0], 
 															res[1], 
-															threshold, 
+															10, 
 															objects, 
-															*CS);
+															[](float *_a, float *_b, float *_c){	if(*_a > 0.705f && *_b < 0.32f && *_c < 0.32f){
+																										*_a = 1.0f;
+																										*_b = 0;
+																										*_c = 0;
+																										return 4;
+																									} else{
+																										*_a = 0;
+																										*_b = 0;
+																										*_c = 0;
+																										return -1;
+																									}
+																									});
 
-				cv::imshow("bubble", image);
-				
-				cv::cvtColor(image, image, CV_BGR2RGB);
-
+				for(unsigned int i = 0 ; i < objects.size() ; i ++){
+					std::cout << "(x, y) == (" << objects[i].getCentroid().x << ", " << objects[i].getCentroid().y << ")" << std::endl;
+				}
 			}	// COLOR CLUSTER SEGMENTATION
 			
 			//-------------------------------------------------------------------------
