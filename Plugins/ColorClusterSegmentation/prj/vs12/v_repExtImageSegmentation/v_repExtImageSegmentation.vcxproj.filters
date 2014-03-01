@@ -13,36 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="v_rep">
-      <UniqueIdentifier>{54508915-35cc-4131-8d6f-1af8d7056bbe}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="v_repExtSimpleFilter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pluginGlobals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="v_rep\include\extApiCustomConst.h">
-      <Filter>v_rep</Filter>
-    </ClInclude>
-    <ClInclude Include="v_rep\include\v_repConst.h">
-      <Filter>v_rep</Filter>
-    </ClInclude>
-    <ClInclude Include="v_rep\include\v_repLib.h">
-      <Filter>v_rep</Filter>
-    </ClInclude>
-    <ClInclude Include="v_rep\include\v_repTypes.h">
-      <Filter>v_rep</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="v_repExtSimpleFilter.cpp">
+    <ClCompile Include="..\..\..\CCS\v_repExtSimpleFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="v_rep\common\v_repLib.cpp">
-      <Filter>v_rep</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\CCS\pluginGlobals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CCS\v_repExtSimpleFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
