@@ -5,9 +5,3 @@
 /Plugins/ColorClusterSegmentation/Debug
 /Plugins/ColorClusterSegmentation/CCS/Release
 /Plugins/ColorClusterSegmentation/Release
-/Plugins/ColorClusterSegmentation/prj/vs12/v_repExtImageSegmentation/Debug
-/Plugins/ColorClusterSegmentation/prj/vs12/*.sdf
-/Plugins/ColorClusterSegmentation/prj/vs12/*.suo
-/Plugins/ColorClusterSegmentation/prj/vs12/v_repExtImageSegmentation/Release
-/Plugins/ColorClusterSegmentation/prj/vs12/*.user
-/Plugins/ColorClusterSegmentation/prj/vs12/Release
