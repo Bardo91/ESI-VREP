@@ -10,6 +10,7 @@
 #include "pluginGlobals.h"
 
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 #include <opencv/cv.h>
@@ -165,11 +166,11 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 			else if (auxiliaryData[1]==-2) { // Filter: Color Cluster Segmentation
 	
 				// 666 TODO: displayear de alguna forma para luego hacer el EKF.
-				std::vector<BOVIL::ImageObject> objects;
+				std::vector<BOViL::ImageObject> objects;
 				
 
 				// 666 TODO: está recibiendo  todo vacío
-				BOVIL::algorithms::ColorClustering<float>(	workImage,
+				BOViL::algorithms::ColorClustering<float>(	workImage,
 															res[0], 
 															res[1], 
 															10, 
@@ -189,6 +190,20 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 
 				for(unsigned int i = 0 ; i < objects.size() ; i ++){
 					std::cout << "(x, y) == (" << objects[i].getCentroid().x << ", " << objects[i].getCentroid().y << ")" << std::endl;
+					
+					std::stringstream ss;
+					ss << objects[i].getCentroid().x << ";" << objects[i].getCentroid().y;
+					int result;
+					std::string msg = ss.str();
+					simInt quadHandle = simGetObjectHandle("Quadricopter");
+					
+					result = simAddObjectCustomData(quadHandle, DEVELOPER_DATA_HEADER, msg.c_str(), msg.size());
+
+					if(result == -1)
+						std::cout << "ERROR CUSTOM DATA" << std::endl;
+
+					
+
 				}
 			}	// COLOR CLUSTER SEGMENTATION
 			
