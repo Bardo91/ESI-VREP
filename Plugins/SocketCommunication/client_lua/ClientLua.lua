@@ -7,7 +7,7 @@
 
 
 -- Following function writes data to the socket (only single packet data for simplicity sake):
-	writeSocketData=function(client,data)
+writeSocketData=function(client,data)
 	client:send(data)	-- How to concatenate string: str1..str2..str3..str4
 end
 
@@ -59,7 +59,7 @@ while (simGetSimulationState()~=sim_simulation_advancing_abouttostop) do
 			
 			-- 666 TODO: cambiar de aqui en adelante... Vamos ya queda poco! ;)
 			-- Pack the data as a string:
-			dataOut = dt.."PROBANDOOO"
+			dataOut = "Step time: "..dt
 			-- Send the data:
 			writeSocketData(client,dataOut)
 			
@@ -67,6 +67,7 @@ while (simGetSimulationState()~=sim_simulation_advancing_abouttostop) do
 			simSwitchThread() -- This thread will resume just before the main script is called again
 		end
 	end
+	writeSocketData(client, "QUIT");
 	client:close()
 end
 
