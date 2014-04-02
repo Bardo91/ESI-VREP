@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v_repExtCCS", "CCS\CCS.vcxproj", "{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BOViL", "..\..\..\BOVIL\prj\vs12\BOVIL.vcxproj", "{3C03AE01-0616-4AAF-B25C-760146ACED3A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v_repExtImageFiltersBOViL", "prj\vs12\v_repExtImageFiltersBOViL.vcxproj", "{D59AD76A-C47A-411B-95A8-DBD677AEE2CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +11,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}.Debug|Win32.Build.0 = Debug|Win32
-		{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}.Release|Win32.ActiveCfg = Release|Win32
-		{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}.Release|Win32.Build.0 = Release|Win32
 		{3C03AE01-0616-4AAF-B25C-760146ACED3A}.Debug|Win32.ActiveCfg = Debug|Win32
 		{3C03AE01-0616-4AAF-B25C-760146ACED3A}.Debug|Win32.Build.0 = Debug|Win32
 		{3C03AE01-0616-4AAF-B25C-760146ACED3A}.Release|Win32.ActiveCfg = Release|Win32
 		{3C03AE01-0616-4AAF-B25C-760146ACED3A}.Release|Win32.Build.0 = Release|Win32
+		{D59AD76A-C47A-411B-95A8-DBD677AEE2CB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D59AD76A-C47A-411B-95A8-DBD677AEE2CB}.Debug|Win32.Build.0 = Debug|Win32
+		{D59AD76A-C47A-411B-95A8-DBD677AEE2CB}.Release|Win32.ActiveCfg = Release|Win32
+		{D59AD76A-C47A-411B-95A8-DBD677AEE2CB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

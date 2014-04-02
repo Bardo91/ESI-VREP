@@ -21,3 +21,6 @@
 /Plugins/ROS/ROS_publisher/prj/vs12/*.sdf
 /Plugins/ROS/ROS_publisher/prj/vs12/*.suo
 /Plugins/ColorClusterSegmentation/prj/vs12/*.opensdf
+/Plugins/ColorClusterSegmentation/*.opensdf
+/Plugins/ColorClusterSegmentation/prj/vs12/Debug/*.tlog
+/Plugins/ColorClusterSegmentation/prj/vs12/Debug

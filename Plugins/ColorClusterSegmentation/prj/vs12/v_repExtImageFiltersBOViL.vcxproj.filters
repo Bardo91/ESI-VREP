@@ -14,43 +14,35 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="v_replib">
-      <UniqueIdentifier>{33f54e11-3f64-4b6e-a65d-ff69319ee555}</UniqueIdentifier>
+      <UniqueIdentifier>{069e54d3-dabb-4621-9f89-ca959bf95ac2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\CCS\v_repExtSimpleFilter.cpp">
+    <ClCompile Include="..\..\source\v_repExtSimpleFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\common\v_repLib.cpp">
+    <ClCompile Include="..\..\source\v_rep\common\v_repLib.cpp">
       <Filter>v_replib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\CCS\pluginGlobals.h">
+    <ClInclude Include="..\..\source\pluginGlobals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pluginGlobals.h">
+    <ClInclude Include="..\..\source\v_repExtSimpleFilter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\extApiCustomConst.h">
+    <ClInclude Include="..\..\source\v_rep\include\extApiCustomConst.h">
       <Filter>v_replib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\v_repConst.h">
+    <ClInclude Include="..\..\source\v_rep\include\v_repConst.h">
       <Filter>v_replib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\v_repLib.h">
+    <ClInclude Include="..\..\source\v_rep\include\v_repLib.h">
       <Filter>v_replib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\v_repTypes.h">
+    <ClInclude Include="..\..\source\v_rep\include\v_repTypes.h">
       <Filter>v_replib</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="v_repExtSimpleFilter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="v_rep\common\v_repLib.cpp">
-      <Filter>v_rep</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
