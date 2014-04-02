@@ -13,10 +13,16 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="v_replib">
+      <UniqueIdentifier>{33f54e11-3f64-4b6e-a65d-ff69319ee555}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\CCS\v_repExtSimpleFilter.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\common\v_repLib.cpp">
+      <Filter>v_replib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -25,6 +31,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CCS\v_repExtSimpleFilter.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\extApiCustomConst.h">
+      <Filter>v_replib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\v_repConst.h">
+      <Filter>v_replib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\v_repLib.h">
+      <Filter>v_replib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\v_repTypes.h">
+      <Filter>v_replib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

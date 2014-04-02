@@ -165,11 +165,11 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 			else if (auxiliaryData[1]==-2) { // Filter: Color Cluster Segmentation
 	
 				// 666 TODO: displayear de alguna forma para luego hacer el EKF.
-				std::vector<BOVIL::ImageObject> objects;
+				std::vector<BOViL::ImageObject> objects;
 				
 
 				// 666 TODO: está recibiendo  todo vacío
-				BOVIL::algorithms::ColorClustering<float>(	workImage,
+				BOViL::algorithms::ColorClustering<float>(	workImage,
 															res[0], 
 															res[1], 
 															10, 
