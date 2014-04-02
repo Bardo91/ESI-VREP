@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v_repExtImageSegmentation", "v_repExtImageSegmentation\v_repExtImageSegmentation.vcxproj", "{9DA6B7B3-C83C-4FED-A640-0F35C69194A0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v_repExtCCS", "CCS\CCS.vcxproj", "{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BOViL", "..\..\..\..\..\BOVIL\prj\vs12\BOVIL.vcxproj", "{3C03AE01-0616-4AAF-B25C-760146ACED3A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BOViL", "..\..\..\BOVIL\prj\vs12\BOVIL.vcxproj", "{3C03AE01-0616-4AAF-B25C-760146ACED3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9DA6B7B3-C83C-4FED-A640-0F35C69194A0}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9DA6B7B3-C83C-4FED-A640-0F35C69194A0}.Debug|Win32.Build.0 = Debug|Win32
-		{9DA6B7B3-C83C-4FED-A640-0F35C69194A0}.Release|Win32.ActiveCfg = Release|Win32
-		{9DA6B7B3-C83C-4FED-A640-0F35C69194A0}.Release|Win32.Build.0 = Release|Win32
+		{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}.Debug|Win32.Build.0 = Debug|Win32
+		{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}.Release|Win32.ActiveCfg = Release|Win32
+		{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}.Release|Win32.Build.0 = Release|Win32
 		{3C03AE01-0616-4AAF-B25C-760146ACED3A}.Debug|Win32.ActiveCfg = Debug|Win32
 		{3C03AE01-0616-4AAF-B25C-760146ACED3A}.Debug|Win32.Build.0 = Debug|Win32
 		{3C03AE01-0616-4AAF-B25C-760146ACED3A}.Release|Win32.ActiveCfg = Release|Win32
