@@ -33,6 +33,9 @@ int nextFilterEnum=0; // used during enumeration
 char* filterName[filterCount]={ "ESI-PabloRamonSoria:	Simple Red Segmentation",
 								"ESI-PabloRamonSoria:	Color Cluster Segmentation"}; // Names of filters
 
+// TODO 666: nombre de señales etc... cambiar o preconfigurar etc...
+const std::string quad1Signal = "Quad1";
+
 
 // Main functions of the V-REP plugins DLL
 LIBRARY vrepLib;
@@ -186,20 +189,27 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 																									}
 																									});
 
+				simClearStringSignal(quad1Signal.c_str());
+
 				for(unsigned int i = 0 ; i < objects.size() ; i ++){
 					std::cout << "(x, y) == (" << objects[i].getCentroid().x << ", " << objects[i].getCentroid().y << ")" << std::endl;
 					
 					std::stringstream ss;
-					ss << objects[i].getCentroid().x << ";" << objects[i].getCentroid().y;
-					int result;
-					std::string msg = ss.str();
-					simInt quadHandle = simGetObjectHandle("Quadricopter");
+					ss << objects[i].getCentroid().x << ", " << objects[i].getCentroid().y;
 					
-					result = simAddObjectCustomData(quadHandle, DEVELOPER_DATA_HEADER, msg.c_str(), msg.size());
+					std::string msg = ss.str();
+					simInt quadHandle = 0;
+					quadHandle = simGetObjectHandle("Quadricopter");
+					
+					std::cout << "QuadHandle: " << quadHandle << "; message: " << msg << std::endl;
+
+					//int result = simAddObjectCustomData(quadHandle, DEVELOPER_DATA_HEADER, msg.c_str(), msg.size());
+					int result = simSetStringSignal(quad1Signal.c_str(), msg.c_str(), msg.size());
 
 					if(result == -1)
 						std::cout << "ERROR CUSTOM DATA" << std::endl;
-
+					
+					
 					
 
 				}
