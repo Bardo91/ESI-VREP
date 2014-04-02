@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------------------
 //		V-REP Filter Plugins
-//			Author: Pablo Ramón Soria.
+//			Author: Pablo Ramï¿½n Soria.
 //			Based on: V-REP code. Copyright 2006-2014 Dr. Marc Andreas Freese. All rights reserved. 
 //			Date: 2014-02-10
 //---------------------------------------------------------------------------------------
 
 #include "v_repExtSimpleFilter.h"
-#include "v_rep\include\v_repLib.h"
+#include "v_rep/include/v_repLib.h"
 #include "pluginGlobals.h"
 
 #include <iostream>
@@ -65,12 +65,12 @@ VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
 	 vrepLib=loadVrepLibrary(temp.c_str());
 	 if (vrepLib==NULL)
 	 {
-		 std::cout << "Error, could not find or correctly load the V-REP library. Cannot start 'SimpleFilter' plugin.\n";
+		 std::cout << "Error, could not find or correctly load the V-REP library. Cannot start 'SimpleFilter' plugin./n";
 		 return(0); // Means error, V-REP will unload this plugin
 	 }
 	 if (getVrepProcAddresses(vrepLib)==0)
 	 {
-		 std::cout << "Error, could not find all required functions in the V-REP library. Cannot start 'SimpleFilter' plugin.\n";
+		 std::cout << "Error, could not find all required functions in the V-REP library. Cannot start 'SimpleFilter' plugin./n";
 		 unloadVrepLibrary(vrepLib);
 		 return(0); // Means error, V-REP will unload this plugin
 	 }
@@ -169,7 +169,7 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 				std::vector<BOViL::ImageObject> objects;
 				
 
-				// 666 TODO: está recibiendo  todo vacío
+				// 666 TODO: estÃ¡ recibiendo  todo vacÃ­o
 				BOViL::algorithms::ColorClustering<float>(	workImage,
 															res[0], 
 															res[1], 

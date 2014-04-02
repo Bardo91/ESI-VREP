@@ -11,14 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9DA6B7B3-C83C-4FED-A640-0F35C69194A0}</ProjectGuid>
-    <RootNamespace>v_repExtImageSegmentation</RootNamespace>
+    <ProjectGuid>{8D6CAFF8-6ABE-4E71-A29E-F13BE14E55BD}</ProjectGuid>
+    <RootNamespace>CCS</RootNamespace>
+    <ProjectName>v_repExtCCS</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_CTP_Nov2012</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -40,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>C:\Programming\BOVIL\source;C:\opencv\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Programming\BOVIL\prj\vs12\Release;C:\opencv\opencv\build\x86\vc11\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Programming\BOVIL\prj\vs12\Release;C:\Programming\BOVIL\prj\vs12\Debug;C:\opencv\opencv\build\x86\vc11\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\common;C:\Program Files %28x86%29\V-REP3\V-REP_PRO_EDU\programming\include;C:\Programming\BOVIL\source;C:\opencv\opencv\build\include;$(IncludePath)</IncludePath>
@@ -48,36 +49,44 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level2</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_core246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;BOViL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_core246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;BOVIL.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level2</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opencv_core246d.lib;opencv_highgui246d.lib;opencv_imgproc246d.lib;BOViL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_core246.lib;opencv_highgui246.lib;opencv_imgproc246.lib;BOVIL.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\common\v_repLib.cpp" />
     <ClCompile Include="..\..\..\CCS\v_repExtSimpleFilter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\extApiCustomConst.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\v_repConst.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\v_repLib.h" />
+    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\V-REP3\V-REP_PRO_EDU\programming\include\v_repTypes.h" />
     <ClInclude Include="..\..\..\CCS\pluginGlobals.h" />
     <ClInclude Include="..\..\..\CCS\v_repExtSimpleFilter.h" />
   </ItemGroup>
