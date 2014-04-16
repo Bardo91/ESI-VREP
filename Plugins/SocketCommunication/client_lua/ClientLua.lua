@@ -17,6 +17,8 @@ readSocketData=function(client)
 
 end
 
+headerBardo = 34
+
 simSetThreadSwitchTiming(200) -- We wanna manually switch for synchronization purpose (and also not to waste processing time!)
 simDelegateChildScriptExecution()
 
@@ -31,8 +33,9 @@ if (not simGetBooleanParameter(sim_boolparam_threaded_rendering_enabled)) then
 	dlgHandle=simDisplayDialog('Threaded rendering',"Click ok to switch to the threaded rendering mode.",sim_dlgstyle_ok,false)
 end
 
--- Create an auxiliary Console to display whatelse.
-auxConsole=simAuxiliaryConsoleOpen("Cycle times",50,0)
+-- Get the handler of the floor to refer objects to it
+local number floorHandler = simGetObjectHandle("DefaultFloor")
+
 while (simGetSimulationState()~=sim_simulation_advancing_abouttostop) do
 	-- Now build a socket and connect to the server:
 	local socket=require("socket")
@@ -53,13 +56,18 @@ while (simGetSimulationState()~=sim_simulation_advancing_abouttostop) do
 				end
 			end
 
-			local dt=simGetSystemTimeInMilliseconds(theLastTime)
-			simAuxiliaryConsolePrint(auxConsole,"Cycle time (send request + wait for reply + simulate one step): "..dt.." ms\n")
-			theLastTime=simGetSystemTimeInMilliseconds()
-			
-			-- 666 TODO: cambiar de aqui en adelante... Vamos ya queda poco! ;)
+			local dt=simGetSystemTimeInMilliseconds(theLastTime)/1000	-- Get increment of time refered to theLastTime
+			theLastTime=simGetSystemTimeInMilliseconds()			-- Update theLastTime
+
+			-- Get geometricals
+			-- Get the handler of the quad
+			local number quadHandler = simGetObjectHandle("Quadricopter")
+			local table_3 posQuad = simGetObjectPosition(quadHandler, floorHandler)
+			local table_3 eulerQuad = simGetObjectOrientation(quadHandler, floorHandler)
+
 			-- Pack the data as a string:
-			dataOut = "Step time: "..dt
+			dataOut = "("..dt..";"..posQuad[1]..";"..posQuad[2]..";"..posQuad[3]..";"..eulerQuad[1]..";"..eulerQuad[2]..";"..eulerQuad[3]..simGetStringSignal("Quad1")..")"	-- (DeltaTime, xPos, yPox, zPos, alpha, beta, gamma, cX, cY)
+
 			-- Send the data:
 			writeSocketData(client,dataOut)
 			
