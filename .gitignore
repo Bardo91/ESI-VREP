@@ -24,3 +24,10 @@
 /Plugins/ColorClusterSegmentation/*.opensdf
 /Plugins/ColorClusterSegmentation/prj/vs12/Debug/*.tlog
 /Plugins/ColorClusterSegmentation/prj/vs12/Debug
+/Plugins/ColorClusterSegmentation/prj/vs13/Debug/v_repExt.D59AD76A.tlog
+/Plugins/ColorClusterSegmentation/prj/vs13/Debug
+/Plugins/ColorClusterSegmentation/prj/vs13/Release/v_repExt.D59AD76A.tlog
+/Plugins/ColorClusterSegmentation/prj/vs13/Release
+/Plugins/ColorClusterSegmentation/prj/vs13/*.sdf
+/Plugins/ColorClusterSegmentation/prj/vs13/*.suo
+/Plugins/ColorClusterSegmentation/prj/vs13/*.user
