@@ -191,11 +191,11 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 
 				simClearStringSignal(quad1Signal.c_str());
 
-				for(unsigned int i = 0 ; i < objects.size() ; i ++){
+				for(unsigned int i = 0 ; i < objects.size() ; i ++){ /// 666 TODO: solo va  a funcionar con un objecto, revisar
 					std::cout << "(x, y) == (" << objects[i].getCentroid().x << ", " << objects[i].getCentroid().y << ")" << std::endl;
 					
 					std::stringstream ss;
-					ss << objects[i].getCentroid().x << ", " << objects[i].getCentroid().y;
+					ss << objects[i].getCentroid().x << "- " << objects[i].getCentroid().y;
 					
 					std::string msg = ss.str();
 					simInt quadHandle = 0;
