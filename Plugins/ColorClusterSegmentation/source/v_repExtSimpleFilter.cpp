@@ -195,7 +195,7 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
 					std::cout << "(x, y) == (" << objects[i].getCentroid().x << ", " << objects[i].getCentroid().y << ")" << std::endl;
 					
 					std::stringstream ss;
-					ss << objects[i].getCentroid().x << "- " << objects[i].getCentroid().y;
+					ss << objects[i].getCentroid().x << "*" << objects[i].getCentroid().y;
 					
 					std::string msg = ss.str();
 					simInt quadHandle = 0;
